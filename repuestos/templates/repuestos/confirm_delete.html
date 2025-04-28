@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Eliminar Repuesto</h2>
+  <p>¿Seguro que quieres eliminar “{{ repuesto.nombre }}”?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'repuestos:lista' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

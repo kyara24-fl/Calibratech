@@ -1,0 +1,41 @@
+{# templates/admin/base.html (o base.site.html) #}
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}CalibraTech Admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+  <a href="{% url 'admin:index' %}">CalibraTech Admin</a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}
+<ul class="nav-global">
+    <li><a href="{% url 'admin:index' %}">Inicio</a></li>
+    <li><a href="{% url 'registro_lista' %}">Registro</a></li>
+    <li><a href="{% url 'repuestos:lista' %}">Repuestos</a></li>
+    <li><a href="{% url 'admin:tags_tagregistro_changelist' %}">TAG de registro</a></li>
+
+    {# ——— Nuevo enlace al Cronograma ——— #}
+    <li>
+      <a href="{% url 'ver_calendario' %}">
+        📆 Cronograma
+      </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    body.login, body {
+        background-image: url("{% static 'images/presentacion1.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
+{% endblock %}
+
+

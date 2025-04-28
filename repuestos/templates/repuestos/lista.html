@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Repuestos</h2>
+  <a href="{% url 'repuestos:crear' %}" class="btn btn-primary mb-3">Nuevo Repuesto</a>
+  <table class="table">
+    <thead>
+      <tr><th>Nombre</th><th>Equipo</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      {% for rep in repuestos %}
+      <tr>
+        <td>{{ rep.nombre }}</td>
+        <td>{{ rep.equipo.nombre }}</td>
+        <td>
+          <form method="post" action="{% url 'repuestos:eliminar' rep.pk %}" style="display:inline">
+            {% csrf_token %}
+            <button class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="3">No hay repuestos.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
