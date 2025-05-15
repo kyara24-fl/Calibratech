@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 
-from inventario.models import Equipo
+from registro.models import Equipo
 
 @receiver(post_save, sender=Equipo)
 def notificar_creacion_equipo(sender, instance, created, **kwargs):

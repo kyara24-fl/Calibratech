@@ -1,0 +1,11 @@
+﻿{% extends 'registro/base.html' %}
+
+{% block content %}
+  <h1>Agregar Nuevo Equipo</h1>
+  <form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Guardar Equipo</button>
+    <a href="{% url 'registro_lista' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

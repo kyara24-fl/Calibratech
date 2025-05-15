@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Repuesto
 from .forms import RepuestoForm
+import openpyxl
+from django.http import HttpResponse
+from .models import Repuesto
 
 def lista_repuestos(request):
     repuestos = Repuesto.objects.select_related('equipo').all()
@@ -22,4 +25,24 @@ def eliminar_repuesto(request, pk):
         rep.delete()
         return redirect('repuestos:lista')
     return render(request, 'repuestos/confirm_delete.html', {'repuesto': rep})
+
+def exportar_repuestos_excel(request):
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Repuestos"
+
+    
+    ws.append(["Nombre", "Descripción", "Cantidad"])
+
+    
+    for repuesto in Repuesto.objects.all():
+        ws.append([repuesto.nombre, repuesto.descripcion, repuesto.cantidad])
+
+    
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    )
+    response['Content-Disposition'] = 'attachment; filename=Repuestos.xlsx'
+    wb.save(response)
+    return response
 

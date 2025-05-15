@@ -6,7 +6,7 @@ class ResponsableGeneral(models.Model):
         ('MANTENIMIENTO', 'Responsable del Departamento de Mantenimiento'),
     ]
     
-    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, unique=True)
     correo = models.EmailField(unique=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 

@@ -4,14 +4,46 @@
 {% block content %}
   <h1>Inventario de Equipos</h1>
 
-  
-  <a href="{% url 'exportar_equipos' %}" class="btn btn-success mb-3">Exportar Equipos a Excel</a>
+  <a href="{% url 'exportar_equipos' %}" class="btn btn-success mb-3">
+    Exportar Equipos a Excel
+  </a>
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-primary">Registrar</button>
-  </form>
+  <a href="{% url 'add_equipo' %}" class="btn btn-primary mb-4">
+    Registrar Equipo
+  </a>
+
+  {% if equipos %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Serie</th>
+          <th>Sector</th>
+          <th>Fecha Registro</th>
+          <th>Fecha Calibración</th>
+          <th>Próxima Calibración</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for equipo in equipos %}
+          <tr>
+            <td>{{ equipo.nombre }}</td>
+            <td>{{ equipo.marca }}</td>
+            <td>{{ equipo.modelo }}</td>
+            <td>{{ equipo.serie }}</td>
+            <td>{{ equipo.sector }}</td>
+            <td>{{ equipo.fecha_registro|date:"d/m/Y" }}</td>
+            <td>{{ equipo.fecha_calibracion|date:"d/m/Y" }}</td>
+            <td>{{ equipo.fecha_proxima_calibracion|date:"d/m/Y" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No hay equipos registrados.</p>
+  {% endif %}
 {% endblock %}
 
 

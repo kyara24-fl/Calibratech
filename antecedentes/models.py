@@ -1,5 +1,5 @@
 from django.db import models
-from inventario.models import Equipo
+from registro.models import Equipo
 
 class Antecedente(models.Model):
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)

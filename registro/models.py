@@ -1,7 +1,5 @@
 from django.db import models
 
-from django.db import models
-
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     marca = models.CharField(max_length=100)
